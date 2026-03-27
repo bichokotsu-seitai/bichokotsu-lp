@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あなたは何型セラピスト？4タイプ診断 | 美彫骨整体学院</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;700;800&family=Zen+Maru+Gothic:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF7F2;
+    --white: #FFFFFF;
+    --deep: #2C1F18;
+    --pink: #E8A598;
+    --pink-mid: #D4847A;
+    --pink-pale: #FDF0ED;
+    --border: #EDE6DE;
+    --muted: #7A6E64;
+    --type-a: #D4847A; --type-a-pale: #FDF0ED;
+    --type-b: #5E8FA8; --type-b-pale: #EBF3F8;
+    --type-c: #7A9E8A; --type-c-pale: #EEF5F1;
+    --type-d: #C9935A; --type-d-pale: #FDF3EA;
+    --line-green: #06C755;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Zen Maru Gothic', sans-serif; background: var(--bg); color: var(--deep); min-height: 100vh; }
+
+  .hero { background: linear-gradient(160deg, #2C1F18 0%, #3D2A20 50%, #2C1F18 100%); padding: 52px 24px 44px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 50% at 30% 30%, rgba(232,165,152,0.18) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 80% 70%, rgba(122,158,138,0.12) 0%, transparent 55%); }
+  .hero-inner { position: relative; z-index: 1; max-width: 520px; margin: 0 auto; }
+  .school-tag { font-size: 10px; letter-spacing: 4px; color: rgba(232,165,152,0.7); margin-bottom: 22px; display: block; text-transform: uppercase; }
+  .hero-catch { font-size: 12px; letter-spacing: 2px; color: rgba(255,255,255,0.5); margin-bottom: 14px; font-weight: 300; }
+  .hero-title { font-family: 'Shippori Mincho B1', serif; font-size: clamp(24px, 6.5vw, 38px); font-weight: 800; color: #FAF7F2; line-height: 1.45; margin-bottom: 16px; }
+  .hero-title .hl { color: var(--pink); }
+  .hero-sub { font-size: 12.5px; color: rgba(255,255,255,0.5); line-height: 2; font-weight: 300; margin-bottom: 24px; }
+  .hero-sub strong { color: rgba(255,255,255,0.8); font-weight: 500; }
+  .hero-tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+  .hero-tag { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 14px; font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  .wave { line-height: 0; background: linear-gradient(160deg, #2C1F18, #3D2A20); }
+  .wave svg { display: block; width: 100%; }
+
+  .main { max-width: 560px; margin: 0 auto; padding: 8px 20px 80px; }
+
+  .intro-card { background: var(--white); border-radius: 20px; padding: 26px 22px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(44,31,24,0.06); animation: fadeUp 0.6s ease both; }
+  .intro-card p { font-size: 14px; line-height: 2.1; color: #3A2E24; text-align: center; }
+  .intro-card strong { color: var(--pink-mid); font-weight: 700; }
+
+  .type-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 20px; animation: fadeUp 0.6s ease 0.1s both; }
+  .chip { background: var(--white); border-radius: 14px; padding: 14px 16px; border: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .chip-icon { font-size: 20px; flex-shrink: 0; }
+  .chip-text { font-size: 12.5px; font-weight: 700; color: var(--deep); line-height: 1.4; }
+  .chip-sub { font-size: 10px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+
+  .start-btn { width: 100%; padding: 17px; background: linear-gradient(135deg, var(--pink), var(--pink-mid)); color: white; border: none; border-radius: 16px; font-size: 15px; font-weight: 700; cursor: pointer; letter-spacing: 2px; font-family: 'Zen Maru Gothic', sans-serif; box-shadow: 0 4px 22px rgba(212,132,122,0.4); transition: all 0.22s; animation: fadeUp 0.6s ease 0.2s both; }
+  .start-btn:hover { transform: translateY(-2px); }
+
+  .prog-wrap { margin-bottom: 20px; animation: fadeUp 0.4s ease both; }
+  .prog-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .prog-label { font-size: 10px; letter-spacing: 3px; color: var(--pink-mid); font-weight: 700; }
+  .prog-step { font-size: 11px; color: var(--muted); }
+  .prog-dots { display: flex; gap: 5px; }
+  .prog-dot { height: 4px; flex: 1; border-radius: 4px; background: #EDE6DE; transition: background 0.4s; }
+  .prog-dot.done { background: var(--pink); }
+  .prog-dot.active { background: var(--pink-mid); }
+
+  .q-card { background: var(--white); border-radius: 22px; padding: 28px 22px; margin-bottom: 14px; border: 1px solid var(--border); box-shadow: 0 6px 28px rgba(44,31,24,0.07); animation: fadeUp 0.4s ease both; }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .q-badge { background: var(--pink-pale); color: var(--pink-mid); font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px; }
+  .q-line { flex: 1; height: 1px; background: var(--border); }
+  .q-text { font-family: 'Shippori Mincho B1', serif; font-size: clamp(15px, 4vw, 18px); font-weight: 700; line-height: 1.7; color: var(--deep); margin-bottom: 22px; }
+
+  .opts { display: flex; flex-direction: column; gap: 9px; }
+  .opt { background: var(--bg); border: 1.5px solid rgba(44,31,24,0.1); border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: all 0.22s; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13.5px; line-height: 1.65; color: #2A201A; text-align: left; display: flex; align-items: center; gap: 12px; width: 100%; }
+  .opt:hover { border-color: var(--pink); background: var(--pink-pale); transform: translateX(4px); }
+  .opt.selected { border-color: var(--pink-mid); background: linear-gradient(135deg, var(--pink-pale), #FEF5F3); box-shadow: 0 3px 14px rgba(212,132,122,0.18); }
+  .opt-alpha { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid rgba(212,132,122,0.3); background: white; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted); transition: all 0.22s; }
+  .opt.selected .opt-alpha { background: var(--pink-mid); border-color: var(--pink-mid); color: white; }
+
+  .nav { display: flex; gap: 10px; animation: fadeUp 0.4s ease 0.05s both; }
+  .btn-next { flex: 1; padding: 16px; background: linear-gradient(135deg, var(--pink), var(--pink-mid)); color: white; border: none; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; letter-spacing: 1px; transition: all 0.22s; font-family: 'Zen Maru Gothic', sans-serif; box-shadow: 0 4px 18px rgba(212,132,122,0.35); }
+  .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,132,122,0.45); }
+  .btn-next:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
+  .btn-back { padding: 16px 18px; background: transparent; color: var(--muted); border: 1.5px solid var(--border); border-radius: 14px; font-size: 13px; cursor: pointer; transition: all 0.22s; font-family: 'Zen Maru Gothic', sans-serif; }
+  .btn-back:hover { border-color: var(--pink); color: var(--pink-mid); }
+
+  .loading { text-align: center; padding: 60px 20px; animation: fadeUp 0.5s ease both; }
+  .loading-flower { font-size: 42px; margin-bottom: 20px; animation: pulse 1.5s ease infinite; display: block; }
+  .loading-title { font-family: 'Shippori Mincho B1', serif; font-size: 18px; color: var(--deep); margin-bottom: 8px; }
+  .loading-sub { font-size: 12px; color: var(--muted); line-height: 1.9; }
+
+  .result-wrap { animation: fadeUp 0.7s ease both; }
+  .result-band { border-radius: 22px; padding: 36px 24px; text-align: center; margin-bottom: 16px; position: relative; overflow: hidden; }
+  .result-band.type-a { background: linear-gradient(145deg, #3D1E1A, #5A2E28); }
+  .result-band.type-b { background: linear-gradient(145deg, #1A2C3D, #24435A); }
+  .result-band.type-c { background: linear-gradient(145deg, #1A3020, #2A4A32); }
+  .result-band.type-d { background: linear-gradient(145deg, #3A2410, #5A3A1A); }
+  .result-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.1) 0%, transparent 60%); }
+  .result-band-inner { position: relative; z-index: 1; }
+  .result-eyebrow { font-size: 10px; letter-spacing: 4px; color: rgba(255,255,255,0.5); margin-bottom: 16px; display: block; }
+  .result-icon { font-size: 52px; margin-bottom: 12px; display: block; }
+  .result-type-label { font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.6); margin-bottom: 10px; display: block; }
+  .result-type-name { font-family: 'Shippori Mincho B1', serif; font-size: clamp(24px, 6vw, 34px); font-weight: 800; color: white; line-height: 1.35; margin-bottom: 14px; }
+  .result-tagline { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.8; font-weight: 300; }
+
+  .r-card { background: var(--white); border-radius: 20px; padding: 26px 22px; margin-bottom: 14px; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(44,31,24,0.06); }
+  .r-card-head { font-size: 10px; letter-spacing: 3px; font-weight: 700; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--border); display: block; }
+  .r-card-head.a { color: var(--type-a); } .r-card-head.b { color: var(--type-b); } .r-card-head.c { color: var(--type-c); } .r-card-head.d { color: var(--type-d); }
+  .r-desc { font-size: 14px; line-height: 2.1; color: #2A201A; margin-bottom: 18px; }
+  .reco-title { font-size: 11px; color: var(--muted); letter-spacing: 1px; margin-bottom: 10px; display: block; }
+  .reco-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .reco-chip { font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 20px; }
+  .reco-chip.a { background: var(--type-a-pale); color: var(--type-a); } .reco-chip.b { background: var(--type-b-pale); color: var(--type-b); } .reco-chip.c { background: var(--type-c-pale); color: var(--type-c); } .reco-chip.d { background: var(--type-d-pale); color: var(--type-d); }
+  .final-message { border-radius: 14px; padding: 18px 20px; font-family: 'Shippori Mincho B1', serif; font-size: 15px; font-weight: 700; line-height: 1.7; text-align: center; }
+  .final-message.a { background: var(--type-a-pale); color: var(--type-a); } .final-message.b { background: var(--type-b-pale); color: var(--type-b); } .final-message.c { background: var(--type-c-pale); color: var(--type-c); } .final-message.d { background: var(--type-d-pale); color: var(--type-d); }
+
+  .line-cta { background: var(--white); border-radius: 22px; padding: 32px 22px; text-align: center; border: 2px solid rgba(212,132,122,0.25); box-shadow: 0 8px 32px rgba(44,31,24,0.08); margin-bottom: 16px; }
+  .cta-label { display: inline-block; background: linear-gradient(135deg, #E8563A, #C9354A); color: white; font-size: 10px; letter-spacing: 2px; padding: 5px 14px; border-radius: 20px; margin-bottom: 8px; font-weight: 700; }
+  .cta-discount { font-family: 'Shippori Mincho B1', serif; font-size: clamp(20px, 5vw, 28px); font-weight: 800; color: var(--deep); line-height: 1.4; margin-bottom: 8px; }
+  .cta-discount .red { color: #D43A2A; }
+  .cta-sub { font-size: 12.5px; color: var(--muted); line-height: 1.9; margin-bottom: 24px; }
+  .line-btn { display: block; background: var(--line-green); color: white; text-decoration: none; padding: 17px 24px; border-radius: 14px; font-size: 15px; font-weight: 700; letter-spacing: 0.5px; transition: all 0.22s; box-shadow: 0 4px 20px rgba(6,199,85,0.35); font-family: 'Zen Maru Gothic', sans-serif; }
+  .line-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(6,199,85,0.45); }
+  .line-btn-inner { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .retry-btn { background: none; border: none; color: var(--muted); font-size: 12px; cursor: pointer; text-decoration: underline; margin-top: 16px; font-family: 'Zen Maru Gothic', sans-serif; }
+  .back-link { display: block; text-align: center; font-size: 12px; color: var(--muted); text-decoration: none; margin-top: 8px; }
+  .back-link:hover { color: var(--pink-mid); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="school-tag">美彫骨整体学院</span>
+    <p class="hero-catch">子育てしながら自分らしく働きたいあなたへ</p>
+    <h1 class="hero-title">あなたは<span class="hl">何型</span><br>セラピスト？</h1>
+    <p class="hero-sub">〜子育てしながらできる<strong>「私らしい働き方」</strong>がわかる〜</p>
+    <div class="hero-tags">
+      <span class="hero-tag">🌿 共感・癒し型</span>
+      <span class="hero-tag">🔧 技術・職人型</span>
+      <span class="hero-tag">🕊 安定・サポート型</span>
+      <span class="hero-tag">🚀 発信・起業型</span>
+    </div>
+  </div>
+</div>
+
+<div class="wave">
+  <svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,0 C360,48 1080,48 1440,0 L1440,48 L0,48 Z" fill="#FAF7F2"/>
+  </svg>
+</div>
+
+<div class="main">
+
+  <div class="intro-card" id="introCard">
+    <p>全<strong>7問</strong>・約<strong>2分</strong>で完了します。<br>「未経験だから…」「子育て中だから…」と<br>一歩踏み出せないあなたへ。<br><strong>あなたの強みを活かした働き方</strong>が見えてきます。</p>
+  </div>
+
+  <div class="type-chips" id="typeChips">
+    <div class="chip"><span class="chip-icon">🌿</span><div class="chip-text">共感・癒し型<div class="chip-sub">リピートされる癒し手</div></div></div>
+    <div class="chip"><span class="chip-icon">🔧</span><div class="chip-text">技術・職人型<div class="chip-sub">実力で選ばれる存在</div></div></div>
+    <div class="chip"><span class="chip-icon">🕊</span><div class="chip-text">安定・サポート型<div class="chip-sub">長く愛されるサロン</div></div></div>
+    <div class="chip"><span class="chip-icon">🚀</span><div class="chip-text">発信・起業型<div class="chip-sub">仕事を広げる側へ</div></div></div>
+  </div>
+
+  <div id="startWrap">
+    <button class="start-btn" onclick="startQuiz()">診断スタート ✦</button>
+  </div>
+
+  <div class="prog-wrap hidden" id="progWrap">
+    <div class="prog-row">
+      <span class="prog-label">QUESTION</span>
+      <span class="prog-step" id="progStep">1 / 7</span>
+    </div>
+    <div class="prog-dots" id="progDots"></div>
+  </div>
+
+  <div class="q-card hidden" id="qCard">
+    <div class="q-header">
+      <span class="q-badge" id="qBadge">Q.01</span>
+      <div class="q-line"></div>
+    </div>
+    <p class="q-text" id="qText"></p>
+    <div class="opts" id="optsWrap"></div>
+  </div>
+
+  <div class="nav hidden" id="navWrap">
+    <button class="btn-back" id="btnBack" onclick="goBack()">← 戻る</button>
+    <button class="btn-next" id="btnNext" onclick="goNext()" disabled>次へ →</button>
+  </div>
+
+  <div class="loading hidden" id="loadingWrap">
+    <span class="loading-flower">🌸</span>
+    <p class="loading-title">あなたのタイプを診断中…</p>
+    <p class="loading-sub">回答をもとに<br>あなたに合った働き方を分析しています</p>
+  </div>
+
+  <div class="result-wrap hidden" id="resultWrap"></div>
+
+</div>
+
+<script>
+var questions = [
+  { text: "人と関わる時の自分に近いのは？", opts: [{ label: "A", text: "相手の気持ちに自然と寄り添う", type: "A" }, { label: "B", text: "どうすれば改善するか考える", type: "B" }, { label: "C", text: "相手に安心してもらうことを大事にする", type: "C" }, { label: "D", text: "どう伝えたら魅力が伝わるか考える", type: "D" }] },
+  { text: "新しいことを始める時は？", opts: [{ label: "A", text: "楽しそうならまずやってみる", type: "A" }, { label: "B", text: "しっかり理解してからやる", type: "B" }, { label: "C", text: "失敗しないよう慎重に進める", type: "C" }, { label: "D", text: "どうやって広げるかも考える", type: "D" }] },
+  { text: "周りからよく言われるのは？", opts: [{ label: "A", text: "優しい・話しやすい", type: "A" }, { label: "B", text: "しっかりしてる・頼れる", type: "B" }, { label: "C", text: "真面目・丁寧", type: "C" }, { label: "D", text: "行動力がある・すごい", type: "D" }] },
+  { text: "理想の働き方は？", opts: [{ label: "A", text: "人に喜ばれる仕事がしたい", type: "A" }, { label: "B", text: "技術でしっかり稼ぎたい", type: "B" }, { label: "C", text: "安定して長く続けたい", type: "C" }, { label: "D", text: "自由に働いて収入を増やしたい", type: "D" }] },
+  { text: "SNSや発信についてどう思う？", opts: [{ label: "A", text: "見るのは好き", type: "A" }, { label: "B", text: "必要ならやる", type: "B" }, { label: "C", text: "できればやりたくない", type: "C" }, { label: "D", text: "やってみたい・興味ある", type: "D" }] },
+  { text: "仕事で嬉しい瞬間は？", opts: [{ label: "A", text: "ありがとうと言われた時", type: "A" }, { label: "B", text: "結果が出た時", type: "B" }, { label: "C", text: "安心して任せてもらえた時", type: "C" }, { label: "D", text: "人が増えたり広がった時", type: "D" }] },
+  { text: "自分の強みに近いのは？", opts: [{ label: "A", text: "共感力", type: "A" }, { label: "B", text: "分析力・技術力", type: "B" }, { label: "C", text: "継続力・安定感", type: "C" }, { label: "D", text: "発信力・行動力", type: "D" }] }
+];
+
+var typeData = {
+  A: { key: "a", icon: "🌿", label: "① 共感・癒し型", name: "共感・癒し型セラピスト", tagline: "人の気持ちに寄り添えるあなたは<br>\"選ばれる癒しのセラピスト\"です。", desc: "技術以上に「あなたにお願いしたい」と言われるリピートされるタイプ。子育て経験も強みになり、同じ悩みを持つ方に深く寄り添えます。", recos: ["自宅サロン", "リピート重視", "少人数対応"], message: "👉 あなたの優しさは、仕事になります" },
+  B: { key: "b", icon: "🔧", label: "② 技術・職人型", name: "技術・職人型セラピスト", tagline: "結果を出すことに喜びを感じるあなたは<br>\"実力で選ばれるセラピスト\"です。", desc: "技術を磨けば磨くほど信頼が増え、安定した収入につながります。「あの先生に診てもらうと違う」と言われる、専門家タイプ。", recos: ["専門特化サロン", "結果重視メニュー", "技術ブランディング"], message: "👉 あなたは\"結果で選ばれる人\"です" },
+  C: { key: "c", icon: "🕊", label: "③ 安定・サポート型", name: "安定・サポート型セラピスト", tagline: "丁寧で堅実なあなたは<br>\"長く愛されるセラピスト\"です。", desc: "無理なくコツコツ続けることで、気づけば安定した働き方ができています。子育てと両立しながら自分のペースで育てていけるタイプ。", recos: ["副業スタート", "自分のペース運営", "信頼重視サロン"], message: "👉 あなたのペースで必ず形になります" },
+  D: { key: "d", icon: "🚀", label: "④ 発信・起業型", name: "発信・起業型セラピスト", tagline: "行動力と発信力のあるあなたは<br>\"広げる力を持つセラピスト\"です。", desc: "SNSや発信を活かして短期間でお客様を集めることができます。施術だけに止まらず、講師や発信ビジネスへと活動の場を広げていけるタイプ。", recos: ["SNS集客", "オンライン活用", "講師・発信ビジネス"], message: "👉 あなたは\"仕事を広げる側\"の人です" }
+};
+
+var cur = 0, ans = [], sel = null;
+
+function buildDots() {
+  var wrap = document.getElementById('progDots');
+  wrap.innerHTML = '';
+  for (var i = 0; i < questions.length; i++) {
+    var d = document.createElement('div');
+    d.className = 'prog-dot' + (i < cur ? ' done' : i === cur ? ' active' : '');
+    wrap.appendChild(d);
+  }
+}
+
+function startQuiz() {
+  ['startWrap','introCard','typeChips'].forEach(function(id){ document.getElementById(id).classList.add('hidden'); });
+  ['progWrap','qCard','navWrap'].forEach(function(id){ document.getElementById(id).classList.remove('hidden'); });
+  renderQ();
+}
+
+function renderQ() {
+  var q = questions[cur];
+  document.getElementById('qBadge').textContent = 'Q.' + String(cur + 1).padStart(2, '0');
+  document.getElementById('qText').textContent = q.text;
+  var wrap = document.getElementById('optsWrap');
+  wrap.innerHTML = '';
+  for (var i = 0; i < q.opts.length; i++) {
+    (function(idx) {
+      var o = q.opts[idx];
+      var btn = document.createElement('button');
+      btn.className = 'opt' + (ans[cur] === idx ? ' selected' : '');
+      btn.innerHTML = '<span class="opt-alpha">' + o.label + '</span><span>' + o.text + '</span>';
+      btn.onclick = function() { selectOpt(idx); };
+      wrap.appendChild(btn);
+    })(i);
+  }
+  sel = (ans[cur] !== undefined) ? ans[cur] : null;
+  document.getElementById('progStep').textContent = (cur + 1) + ' / ' + questions.length;
+  buildDots();
+  document.getElementById('btnBack').style.visibility = cur === 0 ? 'hidden' : 'visible';
+  document.getElementById('btnNext').disabled = (sel === null);
+  document.getElementById('btnNext').textContent = cur === questions.length - 1 ? '結果を見る ✦' : '次へ →';
+  var qc = document.getElementById('qCard');
+  qc.style.animation = 'none';
+  requestAnimationFrame(function() { qc.style.animation = 'fadeUp 0.4s ease both'; });
+}
+
+function selectOpt(i) {
+  sel = i; ans[cur] = i;
+  document.querySelectorAll('.opt').forEach(function(b, j) { b.classList.toggle('selected', j === i); });
+  document.getElementById('btnNext').disabled = false;
+}
+
+function goNext() {
+  if (sel === null) return;
+  if (cur < questions.length - 1) { cur++; renderQ(); } else showLoading();
+}
+
+function goBack() {
+  if (cur > 0) { cur--; renderQ(); }
+}
+
+function showLoading() {
+  ['qCard','navWrap','progWrap'].forEach(function(id){ document.getElementById(id).classList.add('hidden'); });
+  document.getElementById('loadingWrap').classList.remove('hidden');
+  setTimeout(showResult, 2200);
+}
+
+function showResult() {
+  var counts = { A: 0, B: 0, C: 0, D: 0 };
+  for (var i = 0; i < ans.length; i++) { counts[questions[i].opts[ans[i]].type]++; }
+  var entries = Object.entries(counts).sort(function(x, y) { return y[1] - x[1]; });
+  var winner = entries[0][0];
+  if (entries.length > 1 && entries[0][1] === entries[1][1]) { winner = questions[3].opts[ans[3]].type; }
+
+  var t = typeData[winner];
+  var k = t.key;
+  var recoHTML = t.recos.map(function(r) { return '<span class="reco-chip ' + k + '">・' + r + '</span>'; }).join('');
+
+  document.getElementById('loadingWrap').classList.add('hidden');
+  var rw = document.getElementById('resultWrap');
+  rw.classList.remove('hidden');
+  rw.innerHTML =
+    '<div class="result-band type-' + k + '"><div class="result-band-inner">' +
+      '<span class="result-eyebrow">✦ YOUR THERAPIST TYPE ✦</span>' +
+      '<span class="result-icon">' + t.icon + '</span>' +
+      '<span class="result-type-label">' + t.label + '</span>' +
+      '<h2 class="result-type-name">' + t.name + '</h2>' +
+      '<p class="result-tagline">' + t.tagline + '</p>' +
+    '</div></div>' +
+    '<div class="r-card">' +
+      '<span class="r-card-head ' + k + '">▸ あなたの強みと働き方</span>' +
+      '<p class="r-desc">' + t.desc + '</p>' +
+      '<span class="reco-title">💡 おすすめの働き方</span>' +
+      '<div class="reco-chips">' + recoHTML + '</div>' +
+      '<div class="final-message ' + k + '">' + t.message + '</div>' +
+    '</div>' +
+    '<div class="line-cta">' +
+      '<span class="cta-label">🎁 期間限定</span>' +
+      '<p class="cta-discount">体験会が<span class="red">【半額】</span>で<br>受けられます✨</p>' +
+      '<p class="cta-sub">あなたのタイプに合った働き方を<br>実際に体験してみませんか？<br>今ならLINE登録で特別価格でご案内します</p>' +
+      '<a href="https://lin.ee/YJyfe8d0" class="line-btn"><span class="line-btn-inner">' +
+        '<svg width="26" height="26" viewBox="0 0 48 48" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M24 4C12.95 4 4 11.82 4 21.4c0 8.27 6.84 15.22 16.08 16.72.63.14 1.48.42 1.7.96.19.49.13 1.26.06 1.76l-.27 1.65c-.08.49-.38 1.93 1.69 1.05 2.08-.88 11.23-6.61 15.32-11.32C41.02 29.27 44 25.52 44 21.4 44 11.82 35.05 4 24 4zm-7.5 17.5h-3.75v-7.5h1.5v6h2.25v1.5zm3 0h-1.5v-7.5h1.5v7.5zm8.25 0h-1.5l-3-4.88V21.5h-1.5V14h1.5l3 4.88V14h1.5v7.5zm5.25 0h-4.5V14h4.5v1.5h-3v1.5h3v1.5h-3v1.5h3v1.5z"/></svg>' +
+        'LINEで詳しい結果を受け取る' +
+      '</span></a>' +
+      '<br><button class="retry-btn" onclick="retryQuiz()">もう一度診断する</button>' +
+    '</div>' +
+    '<a href="./index.html" class="back-link">← LPに戻る</a>';
+}
+
+function retryQuiz() {
+  cur = 0; ans = []; sel = null;
+  ['resultWrap','progWrap','qCard','navWrap'].forEach(function(id){ document.getElementById(id).classList.add('hidden'); });
+  document.getElementById('resultWrap').innerHTML = '';
+  ['introCard','typeChips','startWrap'].forEach(function(id){ document.getElementById(id).classList.remove('hidden'); });
+}
+</script>
+</body>
+</html>
